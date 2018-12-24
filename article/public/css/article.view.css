@@ -1,0 +1,196 @@
+html, body {
+    background-color: #fff;
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 200;
+    height: 100vh;
+    margin: 0;
+}
+
+a{
+    color: white !important;
+}
+.nav-text{
+    background-color: rgb(20, 162, 167);
+    color:white;
+    width: 100%;
+    height: 40px;
+}
+.navbar {
+    position: relative;
+    padding: 1.3rem 1rem !important;
+}
+.popover{
+    border-color: rgb(207, 18, 18);  
+}
+.nav-item{
+    color: white;
+}
+.carousel-inner{
+    width:100%;
+    max-height: 675px !important;
+}
+.detail .card{
+    padding: 2rem !important;
+}
+.list .card {
+    border: 0px solid rgba(0,0,0,.125) !important;
+}
+.card-group .card {
+    border: 0px solid rgba(0,0,0,.125) !important;
+}
+.card-body {
+    flex: 1 1 auto;
+    padding: .6rem !important;
+}
+.col-5 .views{
+    float: right;
+    margin-top: 8px;
+    margin-right: 75px;
+    border-radius: 20px;
+    width: 100px;
+}
+.col-10 .views{
+    float: right;
+    margin-top: 8px;
+    margin-right: -10px;
+    border-radius: 20px;
+    width: 100px;
+}
+.card-footer a{
+    float: right;
+    padding: 5px;
+}
+
+.card-footer small i{
+    font-size: 1.5em;
+}
+.contact{
+    padding: 20px;
+}
+.footers-nav {
+    /*position: fixed;*/
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    background-color: #1a2c33;
+    color: white;
+    text-align: right;
+ }
+ .footers {
+    /*position: fixed;*/
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    background-color: black;
+    color: white;
+    text-align: right;
+ }
+ .table thead th {
+    vertical-align: bottom;
+    border-bottom: 0px solid #dee2e6 !important; 
+}
+
+.table td, .table th {
+    padding: 0rem !important; 
+    vertical-align: top;
+    border-top: 0px solid #dee2e6 !important; 
+}
+.crop {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+.crop-list {
+    width: 100%;
+    overflow: hidden;
+}
+.list-foot{
+    bottom: 0;
+}
+.row .col #seeMore{
+    float: right;
+    margin-top: 5px;
+}
+.crop-list img {
+    width: 330px;
+    height: 260px;
+    margin: -75px 0 0 -100px;
+}
+.crop-detail img{
+    width: 450px;
+    height: 300px;
+}
+.crop img {
+    width: 450px;
+    height: 360px;
+    margin: -75px 0 0 -100px;
+}
+.card-contant{
+    width: 100% !important;
+    height: 130px !important;
+}
+.card-contant p {
+    text-align: justify;
+}
+.card-group .col-4 {
+    padding-right: 0px !important; 
+    padding-left: 10px!important;
+    padding-bottom: 30px !important ;
+}
+.contact .empty-box{
+    width: 100%;
+    height: 30px;
+}
+.contact-icon {
+    font-size: 2rem;
+    color: rgb(41, 41, 245);
+}
+.space{
+    padding-left: 10px;
+}
+.container .contact .company{
+    margin-top: 45px;
+}
+.empty-box{
+    width: 100%;
+    height: 35px;
+}
+.row .col-10{
+    margin-left: 85px;
+}
+.row .col-5{
+    margin-left: 85px;
+}
+/* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+   .modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading .modal {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}
