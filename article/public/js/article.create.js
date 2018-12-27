@@ -34,15 +34,11 @@ $(document).ready(function(){
 /**list all article */
 $(document).ready(function(){
     if($('#articleTarget').val()){
-    $('body').addClass('loading');
-    $('h1').css('color','#ecd5c5');
     $.ajax({
         url: "/article/select",
         type: "get",
         contentType: "application/json",
         success : function(response) { 
-            $('body').removeClass('loading');
-            $('h1').css('color','#ecd5c5');
             if(response){    
                 $('#article').bootstrapTable('load',{data : response});
             }
@@ -62,8 +58,6 @@ function deleteArticleFormatter(value, row) {
 }
 
 function ondeleteArticle(id){
-    $('body').addClass('loading');
-    $('h1').css('color','#ecd5c5');
     var r = confirm("are you sure you want to delete article ?");
     if (r == true) {
         $.ajax({
@@ -71,20 +65,12 @@ function ondeleteArticle(id){
             type: "get",
             contentType: "application/json",
             success : function(response) { 
-                setTimeout(function(){
-                    $('body').removeClass('loading');
-                    $('h1').css('color','#ecd5c5');
-                }, 500);
                 if(response){  
                     location.reload();
                 }
             }
         });
     } else {
-        setTimeout(function(){
-            $('body').removeClass('loading');
-            $('h1').css('color','#ecd5c5');
-        }, 500);
         return false;
     }    
 }
@@ -92,15 +78,11 @@ function ondeleteArticle(id){
 /**list all contact */
 $(document).ready(function(){
     if($('#contactTarget').val()){
-    $('body').addClass('loading');
-    $('h1').css('color','#ecd5c5');
     $.ajax({
         url: "/contact/select",
         type: "get",
         contentType: "application/json",
         success : function(response) { 
-            $('body').removeClass('loading');
-            $('h1').css('color','#ecd5c5');
             if(response){    
                 $('#contact').bootstrapTable('load',{data : response});
             }
@@ -119,8 +101,6 @@ function deleteContactFormatter(value, row) {
 }
 
 function ondeleteContact(id){
-    $('body').addClass('loading');
-    $('h1').css('color','#ecd5c5');
     var r = confirm("are you sure you want to delete contact ?");
     if (r == true) {
         $.ajax({
@@ -128,26 +108,18 @@ function ondeleteContact(id){
             type: "get",
             contentType: "application/json",
             success : function(response) { 
-                $('body').removeClass('loading');
-                $('h1').css('color','#ecd5c5');
                 if(response){  
                     location.reload();
                 }
             }
         });
     } else {
-        setTimeout(function(){
-            $('body').removeClass('loading');
-            $('h1').css('color','#ecd5c5');
-        }, 500);
         return false;
     }    
 }
 
 /**on event del */
 function ondelete(id){
-    $('body').addClass('loading');
-    $('h1').css('color','#ecd5c5');
     var r = confirm("are you sure you want to delete banner ?");
     if (r == true) {
         $.ajax({
@@ -155,18 +127,12 @@ function ondelete(id){
             type: "get",
             contentType: "application/json",
             success : function(response) { 
-                $('body').removeClass('loading');
-                $('h1').css('color','#ecd5c5');
                 if(response){  
                     location.reload();
                 }
             }
         });
     } else {
-        setTimeout(function(){
-            $('body').removeClass('loading');
-            $('h1').css('color','#ecd5c5');
-        }, 500);
         return false;
     }    
 }

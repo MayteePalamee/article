@@ -86,7 +86,7 @@
                     </div>
                     <div class="row">
                         <div class="col d-flex justify-content-end">
-                            <a herf="javascript:void(0)" class="btn btn-sm btn-secondary" id="mail">send</a>
+                            <a herf="javascript:void(0)" class="btn btn-md btn-secondary" id="mail">Send</a>
                         </div>
                     </div>
                 </form>

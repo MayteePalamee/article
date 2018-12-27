@@ -1,5 +1,5 @@
 /**loading.. */
-$( window ).on("load", function() {
+/*$( window ).on("load", function() {
     setTimeout(function(){
         $('body').addClass('loading');
         $('h1').css('color','#ecd5c5');
@@ -11,30 +11,7 @@ $(document).ready(function() {
         $('body').removeClass('loading');
         $('h1').css('color','#ecd5c5');
     }, 1000);
-});
-
-window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
-    setTimeout(function(){
-        $("body").attr("class", "");
-        $('body').removeClass('loading');
-        $('h1').css('color','#ecd5c5');
-    }, 500);
-}
-
-$(document).ready(function() {
-    var bodyClasses = document.querySelector('body').className;
-    var myClass = new RegExp("loading");
-    var trueOrFalse = myClass.test( bodyClasses );
-    if(trueOrFalse){
-        $("body").attr("class", "");
-        $('body').removeClass('loading');
-        $('h1').css('color','#ecd5c5');
-    }
-    setTimeout(function(){
-        $('body').removeClass('loading');
-        $('h1').css('color','#ecd5c5');
-    }, 500);
-});
+});*/
 
 $(document).ready(function(){
     $("#view-news").on('click', function(){
@@ -56,8 +33,6 @@ $(document).ready(function(){
             type: "get",
             contentType: "application/json",
             success : function(response) { 
-                $('body').removeClass('loading');
-                $('h1').css('color','#ecd5c5');
                 if(response){  
                     $('#list-content').bootstrapTable('load',{data : response});
                 }
@@ -76,8 +51,6 @@ $(document).ready(function(){
             type: "get",
             contentType: "application/json",
             success : function(response) { 
-                $('body').removeClass('loading');
-                $('h1').css('color','#ecd5c5');
                 if(response){  
                     $('#list-content').bootstrapTable('load',{data : response});
                 }
@@ -117,7 +90,7 @@ function viewsCardFormatter(value, row) {
                                         "<small class='text-muted'><i class='far fa-clock'></i>      "+ 
                                         mydate.toLocaleString('en-EN', options)+ 
                                         "</small>"+
-                                        "<button type='button' class='btn btn-secondary btn-sm views' id='seeMore' onClick='seeMore("+ row.id+","+row.type +")'>see more</button>"+
+                                        "<button type='button' class='btn btn-secondary btn-sm views' id='seeMore' onClick='seeMore("+ row.id+","+row.type +")'>See more</button>"+
                                     "</div>"+
                                 "</div>"+
                             "</div>"+
@@ -195,10 +168,6 @@ $(document).ready(function(){
         }
         else{     
             document.getElementById("send-mail").submit();      
-            setTimeout(function(){
-                $('body').addClass('loading');
-                $('h1').css('color','#ecd5c5');
-            }, 100);  
         }
         return false;
     });

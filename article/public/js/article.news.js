@@ -35,15 +35,11 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     if($('#newsTarget').val()){
-        $('body').addClass('loading');
-        $('h1').css('color','#ecd5c5');
     $.ajax({
         url: "/news/select",
         type: "get",
         contentType: "application/json",
         success : function(response) { 
-            $('body').removeClass('loading');
-            $('h1').css('color','#ecd5c5');
             if(response){    
                 $('#news').bootstrapTable('load',{data : response});
             }
@@ -63,8 +59,6 @@ function deleteFormatter(value, row) {
 }
 
 function ondeleteNews(id){
-    $('body').addClass('loading');
-    $('h1').css('color','#ecd5c5');
     var r = confirm("are you sure you want to delete news ?");
     if (r == true) {
         $.ajax({
@@ -72,18 +66,12 @@ function ondeleteNews(id){
             type: "get",
             contentType: "application/json",
             success : function(response) { 
-                $('body').removeClass('loading');
-                $('h1').css('color','#ecd5c5');
                 if(response){  
                     location.href = "/news/view";
                 }
             }
         });
     } else {
-        setTimeout(function(){
-            $('body').removeClass('loading');
-            $('h1').css('color','#ecd5c5');
-        }, 500);
         return false;
     }    
 }
@@ -94,21 +82,3 @@ $(document).ready(function() {
     }, 5000);
 });
 /**Tab */
-
-/**loading.. */
-$(document).ready(function() {
-    var bodyClasses = document.querySelector('body').className;
-    var myClass = new RegExp("loading");
-    var trueOrFalse = myClass.test( bodyClasses );
-    setTimeout(function(){
-        $('body').removeClass('loading');
-        $('h1').css('color','#ecd5c5');
-    }, 1000);
-});
-
-$( window ).on("load", function() {
-    setTimeout(function(){
-        $('body').addClass('loading');
-        $('h1').css('color','#ecd5c5');
-    }, 100);
-});

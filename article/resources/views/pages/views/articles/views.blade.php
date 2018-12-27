@@ -51,15 +51,24 @@
                                 </div>
                                 <div class="card-contant">
                                     <?php $sp = explode("@p",$new->topic);?>
-                                    <h5 class="card-title">{{$sp[0]}}</h5>
-                                    <p class="card-text">{{$new->content}}</p>
+                                    <h5 class="card-title view-text">{{$sp[0]}}</h5>
+                                    <p class="card-text view-card">{{$new->content}}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <small class="text-muted"><i class="far fa-clock"></i> 
-                                    <?php
-                                        echo date("M jS, Y", strtotime($new->create_at)); 
-                                    ?></small>
-                                    <a href="javascript:void(0)" class="badge badge-pill badge-secondary" onClick="seeMore({{$new->id}},{{$new->type}})">see more</a>
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col">
+                                            <small class="text-muted d-flex align-items-center"><i class="far fa-clock"></i>           
+                                            <div style="padding-left:5px;">
+                                                <?php
+                                                    echo date("M jS, Y", strtotime($new->create_at)); 
+                                                ?>
+                                            </div>
+                                            </small>
+                                        </div>
+                                        <div class="col">
+                                            <a href="javascript:void(0)" class="badge badge-pill badge-secondary" onClick="seeMore({{$new->id}},{{$new->type}})">See more</a>
+                                        </div>
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>
@@ -105,15 +114,24 @@
                                 </div>
                                 <div class="card-contant">
                                     <?php $sc = explode("@p",$article->topic);?>
-                                    <h5 class="card-title">{{$sc[0]}}</h5>
-                                    <p class="card-text">{{$article->content}}</p>
+                                    <h5 class="card-title view-text">{{$sc[0]}}</h5>
+                                    <p class="card-text view-card">{{$article->content}}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <small class="text-muted"><i class="far fa-clock"></i> 
-                                    <?php
-                                        echo date("M jS, Y", strtotime($article->create_at)); 
-                                    ?></small>
-                                    <a href="javascript:void(0)" class="badge badge-pill badge-secondary" onClick="seeMore({{$article->id}},{{$article->type}})">see more</a>
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col">
+                                            <small class="text-muted d-flex align-items-center"><i class="far fa-clock"></i> 
+                                                <div style="padding-left:5px;">
+                                                    <?php
+                                                        echo date("M jS, Y", strtotime($article->create_at)); 
+                                                    ?>
+                                                </div>
+                                            </small>
+                                        </div>
+                                        <div class="col">
+                                            <a href="javascript:void(0)" class="badge badge-pill badge-secondary" onClick="seeMore({{$article->id}},{{$article->type}})">See more</a>
+                                        </div>
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>

@@ -146,7 +146,7 @@ a{
 }
 .contact-icon {
     font-size: 2rem;
-    color: rgb(41, 41, 245);
+    color: rgb(54, 54, 87);
 }
 .space{
     padding-left: 10px;
@@ -163,6 +163,16 @@ a{
 }
 .row .col-5{
     margin-left: 85px;
+}
+.view-card {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.view-text {
+    padding-left: 15px;
+}
+.card-footer a{
+    padding: 8px;
 }
 /* Start by setting display:none to make this hidden.
    Then we position it in relation to the viewport window
