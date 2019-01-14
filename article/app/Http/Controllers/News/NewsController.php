@@ -48,6 +48,13 @@ class NewsController extends Controller
          $imageTopic = null;
         try{           
             if ($request->hasFile('news-topic-image')){
+                /**delete old image */
+               $filetmp = $destinationPath.$request->input('topic-image-temp');
+               if($request->input('topic-image-temp')){
+                    if (file_exists($filetmp)) {
+                        File::delete($filetmp);
+                    }
+               }
                 /**validate file type */
                 $rules = [
                     'news-topic-image' => 'required',
@@ -60,7 +67,9 @@ class NewsController extends Controller
                 }
                 $fileTopic = $request->file('news-topic-image');
                 /**create new the image name*/
-                $imageTopic = pathinfo($fileTopic->getClientOriginalName(), PATHINFO_FILENAME).time().'.'.$fileTopic->getClientOriginalExtension();
+                $imageTopic = pathinfo($fileTopic->getClientOriginalName(), PATHINFO_FILENAME).time();
+                $imageTopic = base64_encode($imageTopic);
+                $imageTopic = $imageTopic.'.'.$fileTopic->getClientOriginalExtension();
                 /** move file to storeage */
                 if(!$fileTopic->move($destinationPath, $imageTopic)){
                     Log::error("these was a problem save file topic.");  
@@ -97,9 +106,20 @@ class NewsController extends Controller
         /**image store path*/
         $destinationPath = public_path('storage/gallery/');
         $imageContent = null;
+        $tmpContent = "";
         $fileContent;
         try{            
             if ($request->hasFile('news-detail-image')){
+                /**delete old image */
+               if($request->input('content-image-temp')){
+                $tmpinput = $request->input('content-image-temp');
+                     foreach($tmpinput as $val){
+                     $filetmp = $destinationPath.$val;
+                         if (file_exists($filetmp)) {
+                             File::delete($filetmp);
+                         }
+                     }
+                 }
                 /**validate file type */
                 $rules = [
                     'news-detail-image' => 'required',
@@ -112,7 +132,10 @@ class NewsController extends Controller
                 }
                 $fileContent = $request->file('news-detail-image');
                 foreach($fileContent as $file){
-                    $imageContent = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).time().'.'.$file->getClientOriginalExtension();
+                    $imageContent = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).time();
+                    $imageContent = base64_encode($imageContent);
+                    $imageContent = $imageContent.'.'.$file->getClientOriginalExtension();
+                    $tmpContent = $tmpContent.$imageContent.",";
                     /** move file to storeage */
                     if(!$file->move($destinationPath, $imageContent)){
                         Log::error("these was a problem save file content."); 
@@ -132,7 +155,7 @@ class NewsController extends Controller
                 /**spilt files */
                 $files = $request->input('content-image-temp');
                 foreach($files as $file ){
-                    $imageContent = $imageContent.$file.",";
+                    $tmpContent = $tmpContent.$file.",";
                 }                    
             }
         }catch(Exception $e){
@@ -149,7 +172,7 @@ class NewsController extends Controller
             }           
             return redirect('/news/editNews/'.$id)->with('error', 'these was a probleam create news!');
         } 
-        return $imageContent;
+        return $tmpContent;
     }
     //edit and Store News
     public function replaceNews(Request $request, $id){
@@ -257,11 +280,16 @@ class NewsController extends Controller
             /**topic image process */
                 $fileTopic = $request->file('news-topic-image');
             /**create new the image name*/
-            $imageTopic = pathinfo($fileTopic->getClientOriginalName(), PATHINFO_FILENAME).time().'.'.$fileTopic->getClientOriginalExtension();
-            
+            $imageTopic = pathinfo($fileTopic->getClientOriginalName(), PATHINFO_FILENAME).time();
+            $imageTopic = base64_encode($imageTopic);
+            $imageTopic = $imageTopic.'.'.$fileTopic->getClientOriginalExtension();
+
             $fileContent = $request->file('news-detail-image');
             foreach($fileContent as $file){
-                $imageContent = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).time().'.'.$file->getClientOriginalExtension();
+                $imageContent = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).time();
+                $imageContent = base64_encode($file);
+                $imageContent = $imageContent.'.'.$file->getClientOriginalExtension();
+
                 $contentCombine = $contentCombine . $imageContent . ",";
                 array_push($contentArray ,$imageContent);
 

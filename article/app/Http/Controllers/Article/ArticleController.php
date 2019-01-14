@@ -74,6 +74,13 @@ class ArticleController extends Controller
         $imageTopic = null;
        try{           
            if ($request->hasFile('topic-image')){
+               /**delete old image */
+               $filetmp = $destinationPath.$request->input('topic-image-temp');
+               if($request->input('topic-image-temp')){
+                    if (file_exists($filetmp)) {
+                        File::delete($filetmp);
+                    }
+               }
                /**validate file type */
                $rules = [
                    'topic-image' => 'required',
@@ -86,7 +93,9 @@ class ArticleController extends Controller
                }
                $fileTopic = $request->file('topic-image');
                /**create new the image name*/
-               $imageTopic = pathinfo($fileTopic->getClientOriginalName(), PATHINFO_FILENAME).time().'.'.$fileTopic->getClientOriginalExtension();
+               $imageTopic = pathinfo($fileTopic->getClientOriginalName(), PATHINFO_FILENAME).time();
+               $imageTopic = base64_encode($imageTopic);
+               $imageTopic = $imageTopic.'.'.$fileTopic->getClientOriginalExtension();
                /** move file to storeage */
                if(!$fileTopic->move($destinationPath, $imageTopic)){
                    Log::error("these was a problem save file topic.");  
@@ -122,9 +131,20 @@ class ArticleController extends Controller
        /**image store path*/
        $destinationPath = public_path('storage/gallery/');
        $imageContent = null;
+       $tmpContent = "";
        $fileContent;
        try{            
            if ($request->hasFile('content-image')){
+               /**delete old image */
+               if($request->input('content-image-temp')){
+               $tmpinput = $request->input('content-image-temp');
+                    foreach($tmpinput as $val){
+                    $filetmp = $destinationPath.$val;
+                        if (file_exists($filetmp)) {
+                            File::delete($filetmp);
+                        }
+                    }
+                }
                /**validate file type */
                $rules = [
                    'content-image' => 'required',
@@ -137,7 +157,10 @@ class ArticleController extends Controller
                }
                $fileContent = $request->file('content-image');
                foreach($fileContent as $file){
-                $imageContent = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).time().'.'.$file->getClientOriginalExtension();
+                $imageContent = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).time();
+                $imageContent = base64_encode($imageContent);
+                $imageContent = $imageContent.'.'.$file->getClientOriginalExtension();
+                $tmpContent = $tmpContent.$imageContent.",";
                 /** move file to storeage */
                 if(!$file->move($destinationPath, $imageContent)){
                     Log::error("these was a problem save file content."); 
@@ -156,8 +179,8 @@ class ArticleController extends Controller
            }else{
                $files = $request->input('content-image-temp');
                foreach($files as $file ){
-                $imageContent = $imageContent.$file.",";
-            }       
+                  $tmpContent = $tmpContent.$file.",";
+               }       
            }
        }catch(Exception $e){
            if (file_exists($destinationPath.$imageContent)) {
@@ -173,7 +196,7 @@ class ArticleController extends Controller
            }           
            return redirect('/article/edit/'.$id)->with('error', 'these was a probleam create article!');
        } 
-       return $imageContent;
+       return $tmpContent;
     }
     //delete article with id
     public function deleteArticle(Request $request, $id){
@@ -251,8 +274,10 @@ class ArticleController extends Controller
                 
                 $fileTopic = $request->file('topic-image');
                 /**create new the image name*/
-                $imageTopic = pathinfo($fileTopic->getClientOriginalName(), PATHINFO_FILENAME).time().'.'.$fileTopic->getClientOriginalExtension();
-                 /** move file to storeage */
+                $imageTopic = pathinfo($fileTopic->getClientOriginalName(), PATHINFO_FILENAME).time();
+                $imageTopic = base64_encode($imageTopic);
+                $imageTopic = $imageTopic.'.'.$fileTopic->getClientOriginalExtension();
+                /** move file to storeage */
                  if(!$fileTopic->move($destinationPath, $imageTopic)){
                     Log::error("these was a problem save file topic.");   
                     if (file_exists($destinationPath.$imageTopic)) {
@@ -269,7 +294,10 @@ class ArticleController extends Controller
 
                 $fileContents = $request->file('content-image');
                 foreach($fileContents as $file){
-                    $imageContent = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).time().'.'.$file->getClientOriginalExtension();
+                    $imageContent = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).time();
+                    $imageContent = base64_encode($file);
+                    $imageContent = $imageContent.'.'.$file->getClientOriginalExtension();
+
                     $contentCombine = $contentCombine . $imageContent . ",";
                     array_push($contentArray ,$imageContent);
                     if(!$file->move($destinationPath, $imageContent)){

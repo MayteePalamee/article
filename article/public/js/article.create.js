@@ -25,9 +25,16 @@ function TopicImage(input, imagePreview) {
 }
 $(document).ready(function(){
     $("#topic-image").change(function() {
+        $("#topic-preview img").remove();
         TopicImage(this,'div#topic-preview');
     });
     $("#content-image").change(function() {
+        ContentImage(this,'div#content-preview');
+    });
+    $("#content-image-edit").change(function() {
+        var contentToRemove = document.querySelectorAll("#content-preview");
+        $(contentToRemove).remove(); 
+        $( "#re-create" ).append( "<div id='content-preview'></div>" );
         ContentImage(this,'div#content-preview');
     });
 });

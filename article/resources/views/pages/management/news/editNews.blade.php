@@ -40,7 +40,9 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-img">
-                        <img id="news-topic-img" src="{{ asset('storage/gallery/').'/'.$new->topic_picture }}" class="size-img"/>
+                        <div id="topic-preview">
+                            <img id="news-topic-img" src="{{ asset('storage/gallery/').'/'.$new->topic_picture }}" class="size-img"/>
+                        </div>
                         <input type="hidden" name="topic-image-temp" value="{{$new->topic_picture}}"/>
                         <div class="form-group">
                             <label for="news-topic-image">รูปประกอบข่าวสาร</label>                            
@@ -48,15 +50,19 @@
                         </div>
                     </div>  
                         <div class="col-12 col-img">
+                        <div class="row" id="re-create">
                         @foreach($imageContent as $images)
                             @foreach($images as $image)
+                            <div id="preview-edit-content">
                                 <img id="detail-news-img" src="{{ asset('storage/gallery/').'/'.$image }}" class="size-img"/>
+                            </div>
                                 <input type="hidden" name="content-image-temp[]" value="{{$image}}"/>
                             @endforeach  
-                        @endforeach    
+                        @endforeach  
+                          </div>
                             <div class="form-group">
                                 <label for="news-detail-image">รูปรายละเอียดประกอบข่าวสาร</label>
-                                <input name="news-detail-image" type="file" id="news-detail-image">
+                                <input name="news-detail-image[]" type="file" id="news-detail-image" multiple>
                             </div>
                         </div>                                
                 </div>

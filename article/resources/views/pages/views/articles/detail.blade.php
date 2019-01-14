@@ -42,10 +42,13 @@
                         }   
                     ?>
                     <p class="text-justify">{{$contents[0]}}</p>
+                   
                     @foreach($images as $index => $image) 
                         <p class='crop-detail text-center'><img src="{{ asset('/storage/gallery').'/'.$image}}"></p>
-                        <p class="text-justify">{{$contents[$loop->index]}}</p>
-                    @endforeach
+                        @if (count($contents) > $loop->index+1)
+                            <p class="text-justify">{{$contents[$loop->index]}}</p>
+                        @endif
+                    @endforeach                   
                 @endforeach
                 <hr>
                 <small class="text-muted"><i class="far fa-clock"></i> 

@@ -26,10 +26,18 @@ function NewsTopicImage(input,ImagePreview) {
 }
 $(document).ready(function(){
     $("#news-topic-image").change(function() {
+        $("#topic-preview img").remove();
         NewsTopicImage(this, 'div#topic-preview');
     });
     $("#imageInput").change(function() {
         NewsContentImage(this, 'div#content-preview');
+    });
+
+    $("#news-detail-image").change(function() {
+        var contentToRemove = document.querySelectorAll("#preview-edit-content");
+        $(contentToRemove).remove(); 
+        $( "#re-create" ).append( "<div id='preview-edit-content'></div>" );
+        ContentImage(this,'div#preview-edit-content');
     });
 });
 
